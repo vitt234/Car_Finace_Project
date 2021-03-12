@@ -8,7 +8,7 @@ public class CarFinanceDisbursementModuleApplication
 {
 
 	public static void main(String[] args)
-	{
+	{System.out.println("hiiiiiiiiii");
 		SpringApplication.run(CarFinanceDisbursementModuleApplication.class, args);
 	}
 
