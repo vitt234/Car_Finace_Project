@@ -32,7 +32,8 @@ export class SanctionListComponent implements OnInit {
   {
 
     this.formLoan.status='Disburse'
-    this.formLoan.remark='Amount disbursed'
+    this.formLoan.remark = 'Amount disbursed'
+    console.log(status)
     this.id++;
      this.disbursmentForm=
      {
