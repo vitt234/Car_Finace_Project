@@ -1,0 +1,41 @@
+<div class="table-responsive">
+  <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="dataTable_wrapper">
+<div class="container-fluid">
+<h3 class= "text-center">Loan Details</h3>
+<div class="panel-body">
+  <div class="form">
+  <table class="table table-bordered table-hover" id="myTable" style="overflow:scroll;text-align: center;">
+  <thead class="thead-light">
+        <tr>
+        <th scope="col">DisbursementId</th>
+        <th scope="col">DealerName</th>
+        <th scope="col">AccountNumber</th>
+        <th scope="col">PaidAmount</th>
+        <th scope="col">PaymentMode</th>
+        <th scope="col">PaymentDate</th>
+        <th scope="col">Status</th>
+        <th scope="col">Remark</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let loandis of loanDisDetails">
+
+
+  <td>{{loandis.loanDisbursementMasterId}}</td>
+  <td>{{loandis.bankName}}</td>
+  <td>{{loandis.accountNumber}}</td>
+  <td>{{loandis.transferAmount}}</td>
+  <td>{{loandis.amountPayType}}</td>
+  <td>{{loandis.amountPaidDate}}</td>
+  <td>{{loandis.paymentStatus}}</td>
+  <td>{{loandis.loandata.remark}}</td>
+      </tr>
+
+      </tbody>
+      </table>
+
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>

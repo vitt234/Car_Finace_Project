@@ -1,0 +1,107 @@
+<div class="table-responsive" *ngIf="formMain">
+  <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="dataTable_wrapper">
+<div class="container-fluid">
+  <h3 class= "text-center">Loan Details</h3>
+<div class="panel-body">
+  <div class="form">
+  <table class="table table-bordered table-hover" id="myTable" style="overflow:scroll;text-align: center;">
+  <thead class="thead-light">
+        <tr>
+
+        <th scope="col">LoanID</th>
+        <th scope="col">CustomerName</th>
+        <th scope="col">CarPrice</th>
+        <th scope="col">Processingfee</th>
+        <th scope="col">insurance</th>
+        <th scope="col">DownPayment</th>
+        <th scope="col">LoanAmount</th>
+        <th scope="col">ROI(%)</th>
+        <th scope="col">Tenture</th>
+        <th scope="col">EMI</th>
+        <th scope="col">TotalInterest</th>
+        <th scope="col">TotalAmountTobePaid</th>
+        <th scope="col">SanctionDate</th>
+        <th scope="col">remark</th>
+        <th scope="col">loanStatus</th>
+
+        <th scope="col">Action</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loand of loandetails">
+
+
+  <td>{{loand.loanId}}</td>
+  <td>{{loand.customerData.custName}}</td>
+  <td>{{loand.customerData.quotation.onRoadPrice}}</td>
+  <td>{{loand.processingFees}}</td>
+  <td>{{loand.insurance}}</td>
+  <td>{{loand.customerData.advanceEMI}}</td>
+  <td>{{loand.loanAmount}}</td>
+  <td>{{loand.rateOfInterest*1200}}</td>
+  <td>{{loand.customerData.tenure}}</td>
+  <td>{{loand.emi}}</td>
+  <td>{{loand.totalloaninterest}}</td>
+  <td>{{loand.totalamountpaid}}</td>
+  <td>{{loand.sanctionDate}}</td>
+  <td>{{loand.remark}}</td>
+  <td>{{loand.status}}</td>
+
+<td><button type="button" class="btn btn-success" *ngIf="loand.status=='ReadyToDisburse'" (click)='payNow(loand.loanId)'>PayNow</button></td>
+
+
+
+        </tr>
+
+      </tbody>
+      </table>
+
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+
+      <div class="card" *ngIf="formSub" style="width: 400px;margin-left: 330px;">
+        <h2 class="card-header">Disbursment Details</h2>
+          <div class="card-body">
+            <form (ngSubmit)="callbackend()" >
+                <div class="form-group ">
+                  <label for="hname">Bank Account Holder Name</label>
+                  <input type="text" class="form-control" id="hname"  [value]="formLoan.customerData.quotation.dealerDetails.bankDetails.bankAccountHolderName">
+                </div>
+                <div class="form-group ">
+                  <label for="accno">Account number</label>
+                  <input type="text" class="form-control" id="accno"  [value]="formLoan.customerData.quotation.dealerDetails.bankDetails.bankaccountNumber">
+                </div>
+                <div class="form-group ">
+                  <label for="accno">Account Type</label>
+                  <input type="text" class="form-control" id="accno"  [value]="formLoan.customerData.quotation.dealerDetails.bankDetails.accountType">
+                </div>
+                <div class="form-group ">
+                  <label for="tamt">Transfer Amount</label>
+                  <input type="text" class="form-control" id="tamt"   [value]="formLoan.loanAmount">
+                </div>
+                <div class="form-group">
+                  <label for="amtPayType">Amount Pay Type</label>
+                  <select id="amtPayType" class="form-control" [(ngModel)]="payType" [ngModelOptions]="{standalone: true}">
+                    <option selected>Select option</option>
+                    <option value="NEFT">NEFT</option>
+                    <option value="RTGS">RTGS</option>
+                    <option value="UPI">UPI</option>
+                    <option value="Cheque">Cheque</option>
+                    <option value="Cash">Cash</option>
+                  </select>
+                </div>
+                <div class="form-group ">
+                  <label for="tamt">Payment Date</label>
+                  <input type="date" class="form-control" id="tamt" [(ngModel)]="payDate" [ngModelOptions]="{standalone: true}">
+                </div>
+
+                <button type="submit" class="btn btn-success" style="margin-left: 150px;">Pay</button>
+            </form>
+          </div>
+          </div>
+
+

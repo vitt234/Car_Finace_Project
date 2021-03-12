@@ -1,0 +1,109 @@
+<div class="table-responsive" *ngIf="mainform">
+  <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="dataTable_wrapper">
+<div class="container-fluid">
+  <h3 class= "text-center">Loan Details</h3>
+<div class="panel-body">
+  <div class="form">
+  <table class="table  table-bordered table-hover" id="myTable" style="overflow:scroll;text-align: center;" >
+  <thead class="thead-light">
+        <tr>
+
+        <th scope="col">LoanID</th>
+        <th scope="col">CustomerID</th>
+        <th scope="col">CustomerName</th>
+        <th scope="col">Remark</th>
+        <th scope="col">Status</th>
+        <th scope="col">Generate Sanction Letter</th>
+        <th scope="col">Cumstomer Intimation</th>
+        <th scope="col">Disbursement Status</th>
+      </tr>
+      </thead>
+      <tbody>
+  <tr *ngFor="let loand of loandetails">
+
+
+  <td>{{loand.loanId}}</td>
+  <td>{{loand.customerData.custId}}</td>
+  <td>{{loand.customerData.custName}}</td>
+  <td>{{loand.remark}}</td>
+  <td>{{loand.status}}</td>
+  <td><button class="btn btn-primary" (click)="onClick(loand.loanId)">Click Here</button></td>
+  <td>{{loand.customerData.cumstomerIntimation}}</td>
+  <td *ngIf="loand.customerData.cumstomerIntimation=='Agree' && loand.status=='Ok'"><button class="btn btn-primary" (click)="proceedNow(loand.loanId)"  >Proceed</button> </td>
+
+        </tr>
+
+      </tbody>
+      </table>
+
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
+
+       <div class="card" *ngIf="subform" style="width: 600px;margin-left: 230px;height: 650px;" >
+          <div class="card-body" >
+            <div id="sanctionLetter">
+              <div class="container-fluid"  >
+                  <div class="row">
+                      <div class="col">
+                          <h3 class="font-weight-bold text-center">Sanction Letter</h3>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col">
+                          <p class="font-weight-bold text-left">
+                          {{formLoan.customerData.custName}} ,<br>
+                          {{formLoan.customerData.localAddress.city.cityName}} ,<br>
+                          Date : {{currentDate | date:'dd/MM/yyyy'}} </p>
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col text-center">
+                          <p class="font-weight-bold">Subject: Car Loan sanction regarding</p>
+                      </div>
+                  </div>
+                 <div class="container">
+                  <div class="row">
+                      <div class="col">
+                          <p>Dear Sir/Madam,</p>
+                          <p>We are glad to inform you, that your loan {{formLoan.loanAmount}} approved. This sanction letter for all the details
+                              regarding your loan, dated {{currentDate | date:'dd/MM/yyyy'}}.
+                          </p>
+                          <ul class="list-group list-group-flush">
+                              <li>Car Price : <i>{{formLoan.customerData.quotation.onRoadPrice}}</i></li>
+                              <li>Down Payment : <i>{{formLoan.customerData.advanceEMI}}</i></li>
+                              <li>Processing Fees : <i>{{formLoan.processingFees}}</i></li>
+                              <li>Insurance : <i>{{formLoan.insurance}}</i></li>
+                              <li>Loan Amount : <i>{{formLoan.loanAmount}}</i></li>
+                              <li>Loan Interest : <i>{{formLoan.rateOfInterest*1200}}%</i></li>
+                              <li>Loan Tenure : <i>{{formLoan.customerData.tenure}} Year</i></li>
+                            </ul>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col">
+                          <p>Disbursment shall be made upon completion of required documents for the loan and the signature for agreement.</p>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="col text-left">
+                          <p>Regards,</p>
+                          <p> Operational Manager</p>
+                      </div>
+                  </div>
+              </div>
+        </div>
+          </div>
+
+          <div class="row">
+              <div class="col">
+                  <button type="button" class="btn btn-info" style="margin-left: 210px;" (click)="generatePDF()"><i class="fa fa-file-pdf-o" aria-hidden="true" ></i>
+                       Download PDF</button>
+              </div>
+          </div>
+          </div>
+          </div>

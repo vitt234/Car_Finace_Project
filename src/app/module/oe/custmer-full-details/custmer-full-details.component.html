@@ -1,0 +1,446 @@
+<div class="card" style="width: 800px;">
+  <div class="card-body">
+    <h3 class="card-title">Customer Full Details</h3>
+    <h4 class="card-subtitle mb-2 ">Personal Details</h4>
+    <form [formGroup]="customerForm" (ngSubmit)="callbackend()">
+      <div class="form-group ">
+        <label for="inputAddress">Full Name</label>
+        <input type="text" class="form-control" placeholder="Enter Full Name" formControlName="custName">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="inputEmail4">Date Of Birth</label>
+          <input type="date" class="form-control" placeholder="DOB" formControlName="dob">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="age">Age</label>
+          <input type="number" class="form-control" id="age" placeholder="age" formControlName="age">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="gender">Gender</label>
+          <select id="gender" class="form-control" formControlName="gender">
+            <option value="MALE">Male</option>
+            <option value="FEMALE">Female</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="natureOfOccupation">Nature Of Occupation</label>
+          <select id="natureOfOccupation" class="form-control" formControlName="natureOfOccupation">
+            <option value="Employee">Employee</option>
+            <option value="Businessman">Businessman</option>
+            <option value="Farmer">Farmer</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="pancard">Pan Card Number</label>
+          <input type="text" class="form-control" id="pancard" placeholder="Enter Pan Card" formControlName="pancardNo">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="adhar">Adhar Card Number</label>
+          <input type="text" class="form-control" id="adhar" placeholder="Enter Adhar Card"
+            formControlName="adharcardNo">
+        </div>
+      </div>
+      <h4 class="card-title">Address Details :</h4>
+      <h4 class="card-subtitle mb-2 text-muted">Present Address</h4>
+    <div formGroupName="localAddress">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="building">Building Number</label>
+            <input type="text" class="form-control" id="building" placeholder=" Building Number" formControlName="buildingNo">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="street"> Street Name </label>
+            <input type="text" class="form-control" id="street" placeholder="Enter Street Name" formControlName="streetName">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="area"> Area Name </label>
+            <input type="text" class="form-control" id="area" placeholder="Enter Area Name" formControlName="area">
+          </div>
+        </div>
+
+          <div formGroupName="city">
+            <div formGroupName="cityTaluka">
+
+                <div formGroupName="talukaDistrict">
+                <div formGroupName="districtState">
+
+                    <div class="form-group " formGroupName="stateCountry">
+                      <label for="Country">Country</label>
+                      <select id="Country" class="form-control" formControlName="countryName">
+                        <option selected>Select Country</option>
+                        <option>India</option>
+                      </select>
+                    </div>
+                    <!-- country close -->
+
+                  <div class="form-group ">
+                    <label for="State">State</label>
+                    <select id="State" class="form-control" formControlName="stateName">
+                      <option selected>Select State </option>
+                      <option>Maharastra</option>
+                    </select>
+                  </div>
+                  <!-- state close -->
+                </div>
+
+                <div class="form-group ">
+                  <label for="District">District</label>
+                  <select id="District" class="form-control" formControlName="districtName">
+                    <option selected>Select District</option>
+                    <option value="sangali">Sangali</option>
+                    <option value="Pune">Pune</option>
+                    <option value="Akola">Akola</option>
+                  </select>
+                </div>
+                <!-- close District -->
+              </div>
+
+
+              <div class="form-group ">
+                <label for="Taluka">Taluka</label>
+                <select id="Taluka" class="form-control" formControlName="talukaName">
+                  <option >Select Taluka </option>
+                  <option  value="Miraj">Miraj</option>
+                  <option value="Haveli">Haveli</option>
+                  <option value="Akot">Akot</option>
+                </select>
+              </div>
+
+              <!-- close taluka -->
+            </div>
+            <div class="form-group">
+              <label for="City">City</label>
+              <select id="City" class="form-control" formControlName="cityName">
+                <option selected>Select City</option>
+                <option value="Samdoli">Samdoli</option>
+                <option value="Punavale">Punavale</option>
+                <option value="Paras">Paras</option>
+              </select>
+            </div>
+            <!-- city close -->
+          </div>
+          <div class="form-group ">
+            <label for="Pincode">Pincode</label>
+            <input type="text" id="Pincode" class="form-control" placeholder=" Enter Pincode" formControlName="pincode">
+
+          </div>
+
+        <!-- localAdd group close -->
+      </div>
+      <h4 class="card-subtitle mb-2 text-muted">Permanent Address</h4>
+      <input type="checkbox" (change)="fillPermanentadd($event)"> Same as Present
+  <div formGroupName="permentAddress">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="building">Building Number</label>
+            <input type="text" class="form-control" id="building" placeholder=" Building Number" formControlName="buildingNo">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="street"> Street Name </label>
+            <input type="text" class="form-control" id="street" placeholder="Enter Street Name" formControlName="streetName">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="area"> Area Name </label>
+            <input type="text" class="form-control" id="area" placeholder="Enter Area Name" formControlName="area">
+          </div>
+        </div>
+
+
+        <div formGroupName="city">
+          <div formGroupName="cityTaluka">
+
+        <div formGroupName="talukaDistrict">
+            <div formGroupName="districtState">
+                  <div formGroupName="stateCountry">
+                    <div class="form-group ">
+                      <label for="Country">Country</label>
+                      <input type="text" id="Country" class="form-control" placeholder="Enter Country"
+                        formControlName="countryName">
+                    </div>
+                    <!-- close country -->
+                  </div>
+
+                  <div class="form-group ">
+                    <label for="State">State</label>
+                    <input type="text" id="State" class="form-control" placeholder="Enter State" formControlName="stateName">
+                  </div>
+                  <!-- close State -->
+                </div>
+
+                <div class="form-group ">
+
+                  <label for="District">District</label>
+                  <input type="text" id="District" class="form-control" placeholder="Enter District" formControlName="districtName">
+                </div>
+                <!-- close District -->
+              </div>
+
+                <div class="form-group ">
+                  <label for="Taluka">Taluka</label>
+                  <input type="text" id="Taluka" class="form-control" placeholder="Enter Taluka" formControlName="talukaName">
+                </div>
+                <!-- close Taluka -->
+              </div>
+
+              <div class="form-group ">
+                <label for="City">City</label>
+                <input type="text" id="City" class="form-control" placeholder="Enter City" formControlName="cityName">
+              </div>
+
+              <!-- close City -->
+            </div>
+
+            <div class="form-group ">
+              <label for="Pincode">Pincode</label>
+              <input type="number" id="Pincode" class="form-control" placeholder=" Enter Pincode" formControlName="pincode">
+
+            </div>
+
+
+            <!-- permanntAdd group close -->
+          </div>
+          <h4 class="card-subtitle mb-2 ">Contact Details :</h4>
+        <div formGroupName="contactDetails">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="primaryMobileNo">Primary Mobile Number</label>
+              <input type="text" class="form-control" id="primaryMobileNo" placeholder="Enter Mobile Number"
+                formControlName="primaryMobileNo">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="alternativeMobileNo">Alternativ Mobile Number</label>
+              <input type="text" class="form-control" id="alternativeMobileNo" placeholder="Enter Mobile Number"
+                formControlName="alternateMobileNo">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="landlinenumber">Landline number</label>
+              <input type="text" class="form-control" id="landlinenumber" placeholder="Enter Landline Number"
+                formControlName="landlineNo">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="emailadd">Emaiil Address</label>
+              <input type="email" class="form-control" id="emailadd" placeholder="Enter Email id" formControlName="emailId">
+            </div>
+          </div>
+        </div>
+          <h4 class="card-subtitle mb-2 ">Financial Details :</h4>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="Salary">Salary</label>
+              <input type="number" class="form-control" id="Salary" placeholder=" Enter Salary" formControlName="customerSalary">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="Expenses"> Other Expenses </label>
+              <input type="number" class="form-control" id="Expenses" placeholder="Enter Other Expenses"
+                formControlName="customerExpenses">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="emi"> Previous EMI </label>
+              <input type="number" class="form-control" id="emi" placeholder="Enter Privious EMI" formControlName="priviousEMI">
+            </div>
+          </div>
+    <div formGroupName="quotation">
+          <h4 class="card-subtitle mb-2 ">Car Quotation Details :</h4>
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="compName">Company Name</label>
+              <input type="text" class="form-control" id="compName" placeholder=" Enter Company Name"
+                formControlName="companyName">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="carmodel"> Car Model </label>
+              <input type="text" class="form-control" id="carmodel" placeholder="Enter Car Model" formControlName="carModel">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="carname"> Car Name </label>
+              <input type="text" class="form-control" id="carname" placeholder="Enter Car Name" formControlName="carName">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="Showroom"> Showroom Price </label>
+              <input type="number" class="form-control" id="Showroom" placeholder="Enter Showroom Price"
+                formControlName="showRoomPrice">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="road">On Road Price</label>
+              <input type="number" class="form-control" id="road" placeholder=" Enter On road price" formControlName="onRoadPrice">
+            </div>
+          </div>
+
+          <h4 class="card-subtitle mb-2 ">Dealer Details :</h4>
+      <div formGroupName="dealerDetails">
+
+            <div class="form-group col-md-6">
+              <label for="Name"> Dealer Name </label>
+              <input type="text" class="form-control" id="Name" placeholder="Enter Dealer Name" formControlName="delearName">
+            </div>
+      <div formGroupName="bankDetails">
+            <div class="form-group col-md-6">
+              <label for="accno">Account Number</label>
+              <input type="number" class="form-control" id="accno" placeholder=" Enter Account Number"
+                formControlName="bankaccountNumber">
+            </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-4">
+              <label for="bankAccountHolderName"> Bank Account Holder Name </label>
+              <input type="text" class="form-control" id="bankAccountHolderName" placeholder="Enter Name as per Bank"
+                formControlName="bankAccountHolderName">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="branch">Bank Branch Name</label>
+              <input type="text" class="form-control" id="branch" placeholder=" Enter Bank Branch" formControlName="bankBranch">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="acctype">Account Type</label>
+              <select id="acctype" class="form-control" formControlName="accountType">
+                <option selected>Select Account Type</option>
+                <option value="Current">Current</option>
+                <option value="Saving">Saving</option>
+              </select>
+            </div>
+          </div>
+          <!-- Bank Close -->
+          </div>
+       <!-- Dealer Close -->
+          </div>
+      <!-- close CarQuotation -->
+  </div>
+          <h4 class="card-subtitle mb-2 ">Loan Requirement :</h4>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="advanceEMI"> Down payment </label>
+              <input type="number" class="form-control" id="advanceEMI" placeholder="Enter Down Payment" formControlName="advanceEMI">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="tenure">Tenure</label>
+              <input type="number" class="form-control" id="tenure" placeholder=" Enter Tenure in year"
+                formControlName="tenure">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Calculate EMI</button>
+
+
+          <div class="card" style="width: 800px;" *ngIf="loanArr!=null && loanWindow;else Errormsg" >
+            <div class="card-body">
+              <h3 class="card-title">Loan Details</h3>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="lamount">Loan Amount</label>
+                  <input type="text" class="form-control" id="lamount" [value]="loanArr.loanAmount">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="roi"> Rate Of Interest </label>
+                  <input type="text" class="form-control" id="roi" [value]="loanArr.rateOfInterest*1200">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="pfees">Processing Fees </label>
+                  <input type="text" class="form-control" id="pfees" [value]="loanArr.processingFees">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="Insurance">Insurance</label>
+                  <input type="text" class="form-control" id="Insurance" [value]="loanArr.insurance">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="sanctiondate"> Sanction Date </label>
+                  <input type="text" class="form-control" id="sanctiondate" [value]="loanArr.sanctionDate">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="EMI">EMI </label>
+                  <input type="text" class="form-control" id="EMI" [value]="loanArr.emi">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="lInterst"> Total loan Interst </label>
+                  <input type="text" class="form-control" id="lInterst" [value]="loanArr.totalloaninterest">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="lamt">Total Loan Amount </label>
+                  <input type="text" class="form-control" id="lamt" [value]="loanArr.totalamountpaid">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary" (click)="submitData()">Submit</button>
+
+
+            </div>
+          </div>
+
+          <ng-template #Errormsg>
+            <h2 *ngIf="isError">Customer Not Eligible for EMI</h2>
+            <div>
+              <h2> {{msg}} </h2>
+            </div>
+          </ng-template>
+
+        </form>
+  </div>
+</div>
+
+
+
+
+
+<!-- <h3>City List</h3>
+<table border=2px>
+<tr>
+  <th>City</th>
+  <th>Taluka</th>
+  <th>District</th>
+  <th>State</th>
+  <th>Country</th>
+</tr>
+
+<tr *ngFor="let city of cityarr">
+<td>{{city.cityName}}</td>
+<td>{{city.cityTaluka.talukaName}}</td>
+<td>{{city.cityTaluka.talukaDistrict.districtName}}</td>
+<td>{{city.cityTaluka.talukaDistrict.districtState.stateName}}</td>
+<td>{{city.cityTaluka.talukaDistrict.districtState.stateCountry.countryName}}</td>
+</tr>
+</table>
+
+
+
+<div class="create-account">
+  <h2>Create Account</h2>
+  <div class="row">
+    <div class="col-md-6">
+      <form [formGroup]="createAccountForm">
+        <div class="form-group">
+          <select formControlName="country" class="form-control" (change)="onChangeCountry($event.target.value)">
+            <option *ngFor="let city of cityarr" [value]="city.cityTaluka.talukaDistrict.districtState.stateCountry.countryId">
+              {{city.cityName}}
+            </option>
+          </select>
+        </div> -->
+<!--
+         <div class="form-group">
+          <select formControlName="state" class="form-control" (change)="#">
+            <option value="">Select state...</option>
+            <option *ngFor="let state of states" [value]="state.id">{{state.state_name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <select formControlName="city" class="form-control">
+            <option value="">Select city...</option>
+            <option *ngFor="let city of cities" [value]="city.id">{{city.city_name}}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+
+<!-- <button (click)="m1()"></button> -->

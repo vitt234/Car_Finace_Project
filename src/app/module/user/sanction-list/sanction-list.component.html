@@ -1,0 +1,63 @@
+<div class="table-responsive">
+  <div class="dataTables_wrapper container-fluid dt-bootstrap4" id="dataTable_wrapper">
+<div class="container-fluid">
+  <h3 class= "text-center">Loan Details</h3>
+<div class="panel-body">
+  <div class="form">
+  <table class="table table-bordered table-hover" id="myTable" style="overflow:scroll;text-align: center;">
+  <thead class="thead-light">
+        <tr>
+
+        <th scope="col">LoanID</th>
+        <th scope="col">CustomerName</th>
+        <th scope="col">CarPrice</th>
+        <th scope="col">Processingfee</th>
+        <th scope="col">insurance</th>
+        <th scope="col">DownPayment</th>
+        <th scope="col">LoanAmount</th>
+        <th scope="col">ROI(%)</th>
+        <th scope="col">Tenture</th>
+        <th scope="col">EMI</th>
+        <th scope="col">TotalInterest</th>
+        <th scope="col">TotalAmountTobePaid</th>
+        <th scope="col">SanctionDate</th>
+        <th scope="col">remark</th>
+        <th scope="col">Loanstatus</th>
+        <th scope="col">CustomerStatus</th>
+        <th scope="col" colspan="2">custmerintimation</th>
+
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loand of loandetails">
+
+
+  <td>{{loand.loanId}}</td>
+  <td>{{loand.customerData.custName}}</td>
+  <td>{{loand.customerData.quotation.onRoadPrice}}</td>
+  <td>{{loand.processingFees}}</td>
+  <td>{{loand.insurance}}</td>
+  <td>{{loand.customerData.advanceEMI}}</td>
+  <td>{{loand.loanAmount}}</td>
+  <td>{{loand.rateOfInterest*1200}}</td>
+  <td>{{loand.customerData.tenure}}</td>
+  <td>{{loand.emi}}</td>
+  <td>{{loand.totalloaninterest}}</td>
+  <td>{{loand.totalamountpaid}}</td>
+  <td>{{loand.sanctionDate}}</td>
+  <td>{{loand.remark}}</td>
+  <td>{{loand.status}}</td>
+  <td>{{loand.customerData.status}}</td>
+
+<td *ngIf="loand.customerData.status=='Pending'"><button type="button" class="btn btn-success" (click)='agreeButton(loand.customerData.custId)' [disabled]='isDisble'>Agree</button></td>
+<td *ngIf="loand.customerData.status=='Pending'"><button type="button" class="btn btn-danger" (click)='disagreeButton(loand.customerData.custId)' [disabled]='isDisble'>Disagree</button></td>
+        </tr>
+
+      </tbody>
+      </table>
+
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>
