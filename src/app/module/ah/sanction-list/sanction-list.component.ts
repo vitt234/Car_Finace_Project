@@ -66,7 +66,8 @@ payNow(loanid:number)
 {
 
   this.formMain=false;
-  this.formSub=true;
+  this.formSub = true;
+  console.log(status)
 
   this.loandetails.forEach(loan =>
     {
